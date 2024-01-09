@@ -106,6 +106,13 @@ function getPasswordOptions() {
     alert("At least one option should be selected!");
     getPasswordOptions(); // Recursive call until at least one option is selected
   }
+  // adding a boolean value so the option of choosing pass will be taken into consideration
+  return {
+    upperCase: upperCase,
+    lowerCase: lowerCase,
+    numeric: numeric,
+    specialCharacters: specialCharacters,
+  };
 }
 
 // Function for getting a random element from an array
@@ -116,5 +123,44 @@ function getRandom(arr) {
   }
   return random;
 }
+// Function for choosing a password based on the prompt (confirm) result in boolean
+function choosePass(options) {
+  var password = "";
+  for (var i = 0; i < 10; i++) {
+    if (options.lowerCase) {
+      var lowerCaseRandom = getRandom(lowerCasedCharacters);
+      password += lowerCaseRandom;
+    }
+
+    if (options.upperCase) {
+      var upperCaseRandom = getRandom(upperCasedCharacters);
+      password += upperCaseRandom;
+    }
+
+    if (options.numeric) {
+      var numericRandom = getRandom(numericCharacters);
+      password += numericRandom;
+    }
+
+    if (options.specialCharacters) {
+      var specialChRandom = getRandom(specialCharacters);
+      password += specialChRandom;
+    }
+  }
+
+  return password;
+}
+
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+  var options = getPasswordOptions();
+  var password = choosePass(options);
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
