@@ -89,6 +89,7 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
+//
 function getPasswordOptions() {
   var upperCase = confirm(
     "Do you want to include upper case in your password?"
@@ -100,47 +101,20 @@ function getPasswordOptions() {
   var specialCharacters = confirm(
     "Do you want to include special characters in your password?"
   );
-  var conditionMet = false;
-  while (!conditionMet) {
-    conditionMet = false;
-
-    if (lowerCase) {
-      lowerCasedCharacters = true;
-      // conditionMet = true;
-    } else if (upperCase) {
-      upperCasedCharacters = true;
-      // conditionMet = true;
-    } else if (numeric) {
-      numericCharacters = true;
-      conditionMet = true;
-    } else if (specialCharacters) {
-      specialCharacters = true;
-      conditionMet = true;
-    } else {
-      alert("One of the options should be selected!");
-      return getPasswordOptions();
-      conditionMet = false;
-    }
+  // Check if at least one option is selected
+  if (!(lowerCase || upperCase || numeric || specialCharacters)) {
+    alert("At least one option should be selected!");
+    getPasswordOptions(); // Recursive call until at least one option is selected
   }
 }
-console.log(getPasswordOptions());
 
 // Function for getting a random element from an array
-function getRandom(arr) {}
-
-// Function to generate password with user input
-function generatePassword() {}
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+function getRandom(arr) {
+  var random = "";
+  for (var i = 0; i < 5; i++) {
+    random += arr[Math.floor(Math.random() * arr.length)];
+  }
+  return random;
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
