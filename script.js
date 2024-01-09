@@ -118,7 +118,8 @@ function getPasswordOptions() {
 // Function for getting a random element from an array
 function getRandom(arr) {
   var random = "";
-  for (var i = 0; i < 5; i++) {
+  //creating an array that is executing one time for each array so the password will be different length depending on the choice and more or equal to 8 characters
+  for (var i = 0; i < 1; i++) {
     random += arr[Math.floor(Math.random() * arr.length)];
   }
   return random;
@@ -126,7 +127,7 @@ function getRandom(arr) {
 // Function for choosing a password based on the prompt (confirm) result in boolean
 function choosePass(options) {
   var password = "";
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < 8; i++) {
     if (options.lowerCase) {
       var lowerCaseRandom = getRandom(lowerCasedCharacters);
       password += lowerCaseRandom;
